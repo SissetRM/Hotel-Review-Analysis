@@ -5,7 +5,7 @@ import pandas as pd
 def load_data():
     """
     Selects parent directory and loads data from CSV file.
-    :return: Pandas df
+    :return: df - A pandas dataframe.
     """
     base_dir = Path(__file__).resolve().parent.parent
     file_path = base_dir / "data" / "tripadvisor_hotel_reviews.csv"
