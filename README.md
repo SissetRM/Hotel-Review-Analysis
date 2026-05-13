@@ -5,7 +5,7 @@
 This project performs basic Natural Language Processing (NLP) on hotel reviews to identify commonly used words and generate a word cloud visualisation. The objective is to explore patterns in customer feedback and build a structured, modular data analysis pipeline.
 
 The workflow includes:
-- Loading review data from a CSV file
+- Loading review data from an SQL file
 - Cleaning and preprocessing text
 - Tokenising and removing stopwords
 - Analysing word frequency
@@ -179,7 +179,25 @@ Alexander Sainsbury
 
 ---
 
-## License
+## Dataset
+
+This project uses the **TripAdvisor Hotel Reviews dataset** sourced from Kaggle.
+
+### Source
+#### Kaggle Dataset: TripAdvisor Hotel Reviews
+Link: https://www.kaggle.com/datasets/andrewmvd/trip-advisor-hotel-reviews
+
+### Citation
+Alam, M. H., Ryu, W.-J., Lee, S. (2016).  
+*Joint multi-grain topic sentiment: modeling semantic aspects for online reviews.*  
+Information Sciences, 339, 206–223.  
+
+### Dataset Licence
+This dataset is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** licence.
+
+---
+
+## Project License
 
 This project is licensed under the MIT License.
 

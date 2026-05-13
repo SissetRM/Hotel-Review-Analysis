@@ -1,34 +1,44 @@
+import sqlite3
 from pathlib import Path
 import pandas as pd
+import json
 
 # Base output directory
 BASE_DIR = Path(__file__).resolve().parent.parent
-OUTPUT_DIR = BASE_DIR / "outputs"
-
-# Ensure folder exists
-OUTPUT_DIR.mkdir(exist_ok=True)
+DB_PATH = BASE_DIR / "data" / "hotel_reviews.db"
+print(DB_PATH)
 
 
-def save_word_frequencies(word_list, filename="top_words.csv"):
+def save_word_frequencies(word_list, table_name="top_words"):
     """
     Save word frequency list to CSV.
     :param word_list: list of tuples [(word, count), ...]
-    :param filename: string
+    :param table_name: string
     :return: file_path
     """
     df = pd.DataFrame(word_list, columns=["word", "count"])
-    file_path = OUTPUT_DIR / filename
-    df.to_csv(file_path, index=False)
-    return file_path
+    conn = sqlite3.connect(DB_PATH)
+    if "tokens" in df.columns:
+        df["tokens"] = df["tokens"].apply(json.dumps)
+    df.to_sql(table_name, conn, if_exists="replace", index=False)
+    conn.close()
+
+    return table_name
 
 
-def save_cleaned_data(df, filename="cleaned_data.csv"):
+def save_cleaned_data(df, table_name="cleaned_data"):
     """
     Save cleaned dataframe for reuse.
     :param df: Pandas dataframe.
-    :param filename: string
-    :return: file_path
+    :param table_name: string
+    :return: table_name
     """
-    file_path = OUTPUT_DIR / filename
-    df.to_csv(file_path, index=False)
-    return file_path
+    conn = sqlite3.connect(DB_PATH)
+    if "tokens" in df.columns:
+        df["tokens"] = df["tokens"].apply(json.dumps)
+
+    df.to_sql(table_name, conn, if_exists="replace", index=False)
+
+    conn.close()
+
+    return table_name

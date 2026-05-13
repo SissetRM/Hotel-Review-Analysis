@@ -1,6 +1,7 @@
 from pathlib import Path
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import json
 
 # Finds the appropriate path for the file to be output to.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,8 +16,24 @@ def generate_wordcloud(tokens_series, title="Word Cloud"):
     :param title: String
     :return: None
     """
+    cleaned_tokens = []
+
+    for item in tokens_series:
+
+        # Case 1: already a list
+        if isinstance(item, list):
+            cleaned_tokens.extend(item)
+
+        # Case 2: JSON string (from DB storage)
+        elif isinstance(item, str) and item.startswith("["):
+            cleaned_tokens.extend(json.loads(item))
+
+        # Case 3: plain string (space-separated)
+        elif isinstance(item, str):
+            cleaned_tokens.extend(item.split())
+
     # Converts the pandas series into a long string of text.
-    text = " ".join([" ".join(tokens) for tokens in tokens_series])
+    text = " ".join(cleaned_tokens)
 
     # Sets the dimensions fo the words cloud and the colour then generate it from the text.
     wc = WordCloud(width=800, height=400, background_color="white").generate(text)
