@@ -16,11 +16,12 @@ def main():
     df = tokenize_column(df, "clean")
     print(df.head())
 
-    # Save cleaned dataset
-    save_cleaned_data(df)
-
     # Analysis
     top_words = get_top_words(df["tokens"])
+    print(top_words)
+
+    # Save cleaned dataset
+    save_cleaned_data(df)
 
     # Save results
     save_word_frequencies(top_words)

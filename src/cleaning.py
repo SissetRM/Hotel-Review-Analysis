@@ -8,7 +8,7 @@ stop_words = set(stopwords.words("english"))
 
 def clean_text(text):
     """
-    Transforms a string text to lowercase and removes plurals.
+    Transforms a string text to lowercase and removes punctuation, numbers, and symbols.
     :param text: String
     :return: text
     """
@@ -19,7 +19,7 @@ def clean_text(text):
 
 def clean_text_column(df, column):
     """
-    Transforms a pandas column of text to lowercase and removes the plurals
+    Transforms a pandas column of text to lowercase and removes punctuation, numbers, and symbols.
     :param df: A pandas dataframe
     :param column: A pandas column
     :return: df
