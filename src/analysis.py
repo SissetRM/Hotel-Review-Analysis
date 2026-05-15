@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
+
 def get_top_words(tokens_series, n=20):
     """
     Gets the 20 most common words.
@@ -52,7 +53,7 @@ def lr_rating(reviews, ratings):
     # Turn the raw text into numerical values of importance based on how often they appear.
     vectorizer = TfidfVectorizer(
         max_features=5000,
-        ngram_range=(1,2)  # Include two word phrases (e.g. "not good", "very clean").
+        ngram_range=(1, 2)  # Include two word phrases (e.g. "not good", "very clean").
     )
     x_train_vec = vectorizer.fit_transform(x_train)
     x_test_vec = vectorizer.transform(x_test)
