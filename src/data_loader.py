@@ -63,5 +63,5 @@ def load_sql_data_from_db():
 
 
 if __name__ == "__main__":
-    load_csv_data()
-    load_sql_data_from_db()
+    df_csv = load_csv_data()
+    df_sql = load_sql_data_from_db()

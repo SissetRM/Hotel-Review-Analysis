@@ -3,6 +3,7 @@ from src.analysis import get_top_words
 from src.visualisation import generate_wordcloud
 from src.output import save_word_frequencies, save_cleaned_data
 from src.data_loader import load_sql_data_from_db
+from src.analysis import lr_rating
 
 
 def main():
@@ -27,6 +28,9 @@ def main():
     save_word_frequencies(top_words)
 
     generate_wordcloud(df["tokens"], title="Hotel Reviews")
+
+    # Create a rating prediction model for the dataset.
+    lr_rating(df["Review"], df["Rating"])
 
 
 if __name__ == "__main__":
